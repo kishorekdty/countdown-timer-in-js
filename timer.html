@@ -1,0 +1,69 @@
+<html>
+<head>
+</head><title> COUNT DOWN TIMER</title></head>
+<div align ="center"><canvas id="canvas" width=400 height=150 style= "border: 5px solid #000000"></div>
+</canvas>
+<body>
+<form><center>
+<p>Minutes: <input type = "text" id = "minutes"/>
+      Seconds: <input type = "text" id = "seconds"/>
+<input type="button" value="start" onclick="start()">
+<input type="button" value="set" onclick="set()">
+<input type="button" value="stop" onclick="stop()">
+</center>
+<script>
+var canvas=document.getElementById("canvas");
+var context=canvas.getContext("2d");
+context.font = "bold 80px Arial";
+ctxt.fillText("00 : 00",50,100);
+
+function set(){
+var minit=document.getElementById("minutes").value;
+var second=document.getElementById("seconds").value;
+context.fillStyle = "green";
+context.clearRect(0,0,400,150);
+context.fillText(minit + ":" + second, 100,100);
+}
+
+function counter()
+{
+if(second>=0)
+{
+if(minit>=0)
+{
+context.clearRect(0,0,400,150);
+context.fillText(minit + ":" + second, 100,100);
+second=second-1;
+}
+}
+else if(minit>0)
+{
+second=59;
+minit=minit-1;
+context.clearRect(0,0,400,150);
+context.fillText(minit + ":" + second, 100,100)
+second=second-1
+}
+
+else{
+context.fillRect(0,0,400,150);
+context.fillStyle = "red";
+context.fillText("time out",50,100);
+clearInterval(timerid);
+}
+}
+
+function start(){
+minit=document.getElementById("minutes").value;
+second=document.getElementById("seconds").value;
+context.clearRect(0,0,400,150)
+timerid=window.setInterval(counter,1000);
+}
+
+function stop(){
+window.clearInterval(timerid);
+}
+
+</script>
+</body>
+</html>
